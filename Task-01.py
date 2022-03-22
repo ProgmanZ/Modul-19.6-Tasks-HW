@@ -24,15 +24,6 @@ ask_list = {1: 'первой',
             }
 
 
-def string_ending_time(number):
-    if 2 <= (number % 10) <= 4 and not 11 < number < 15:
-        return 'минуты'
-    elif number % 10 == 1 and number != 11:
-        return 'минута'
-    else:
-        return 'минут'
-
-
 def check_song(ind):
     while True:
         name_song = input(f'Название {ask_list[ind]} песни: ')
@@ -54,10 +45,7 @@ while True:
 
 
 list_selected_tracks = [check_song(i) for i in range(1, tracks + 1)]
-
 all_time_tracks = sum([violator_songs[name_of_single] for name_of_single in list_selected_tracks ])
 all_time_tracks = round(all_time_tracks, ndigits=2)
 
-
-print('\nОбщее время звучания песен:', all_time_tracks, string_ending_time(int(str(all_time_tracks)[-1])))
-
+print('\nОбщее время звучания песен:', all_time_tracks, 'минуты.')
