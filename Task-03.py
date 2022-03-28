@@ -46,19 +46,31 @@ data = {
     ]
 }
 
+type_dict = type(data)
+type_list = type(list())
+
+
+# def dict_print(dict_for_prn):
+#     keys_dict = dict_for_prn.keys()
+#     for i in keys_dict:
+#         if type(i) == type_dict:
+#             dict_print(i)
+#         elif type(i) == list:
+#             print(f'ключ {i} содержит значения', end=' ')
+#             print(vol for vol in dict_for_prn[i])
+#         else:
+#             print(dict_for_prn[i])
+
 
 def dict_print(dict_for_prn):
-    type_dict = dict_for_prn.keys()
-    for i in type_dict:
-        if type(i) == dict:
-            dict_print(i)
-        else:
-            print(f'ключ {i} содержит значения', end=' ')
-            print(vol for vol in dict_for_prn[i])
+    list_keys = list()
+    keys = dict_for_prn.keys()
+    return
 
 
 print('Списки ключей и значений словаря:')
-dict_print(data)
+print(dict_print(data))
+
 
 # В “ETH” добавить ключ “total_diff” со значением 100.
 #
