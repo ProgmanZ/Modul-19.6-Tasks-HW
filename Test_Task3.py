@@ -19,5 +19,17 @@ def find_keys(user_dict, list_keys):
     return list_keys
 
 
+def find_vol(user_dict, list_vol):
+    for k in user_dict:
+        if type(user_dict[k]) is dict:
+            find_vol(user_dict[k], list_vol)
+        else:
+            list_vol.append(user_dict[k])
+    return list_vol
+
+
 list_user_key = list()
-print('Все ключи словаря:',find_keys(data, list_user_key))
+list_user_vol = list()
+
+print('Все ключи словаря:', find_keys(data, list_user_key))
+print('Все значения словаря:', find_vol(data, list_user_vol))
