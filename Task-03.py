@@ -46,30 +46,31 @@ data = {
     ]
 }
 
-type_dict = type(data)
-type_list = type(list())
+
+def find_keys(user_dict, list_keys):
+    for k in user_dict:
+        if type(user_dict[k]) is dict:
+            list_keys.append(k)
+            find_keys(user_dict[k], list_keys)
+        else:
+            list_keys.append(k)
+    return list_keys
 
 
-# def dict_print(dict_for_prn):
-#     keys_dict = dict_for_prn.keys()
-#     for i in keys_dict:
-#         if type(i) == type_dict:
-#             dict_print(i)
-#         elif type(i) == list:
-#             print(f'ключ {i} содержит значения', end=' ')
-#             print(vol for vol in dict_for_prn[i])
-#         else:
-#             print(dict_for_prn[i])
+def find_vol(user_dict, list_vol):
+    for k in user_dict:
+        if type(user_dict[k]) is dict:
+            find_vol(user_dict[k], list_vol)
+        else:
+            list_vol.append(user_dict[k])
+    return list_vol
 
 
-def dict_print(dict_for_prn):
-    list_keys = list()
-    keys = dict_for_prn.keys()
-    return
+list_user_key = list()
+list_user_vol = list()
 
-
-print('Списки ключей и значений словаря:')
-print(dict_print(data))
+print('Все ключи словаря:', find_keys(data, list_user_key))
+print('Все значения словаря:', find_vol(data, list_user_vol))
 
 
 # В “ETH” добавить ключ “total_diff” со значением 100.
