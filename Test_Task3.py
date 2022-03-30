@@ -9,17 +9,20 @@ data = {
 }
 
 
-def find_keys(user_dict):
-    list_keys = list()
-    if user_dict is dict:
+def find_keys(user_dict, list_keys):
+
+    if type(user_dict) is dict:
         key = user_dict.keys()
         for k in key:
             if type(user_dict[k]) is dict:
-                list_keys.extend(find_keys(user_dict[k].keys()))
+                find_keys(user_dict[k].keys(), list_keys)
                 # print(data[k].keys())
 
             else:
                 list_keys.append(k)
     return list_keys
 
-print(find_keys(data))
+
+list_user_key = list()
+print(find_keys(data, list_user_key))
+print(data.keys())
