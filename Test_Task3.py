@@ -10,19 +10,14 @@ data = {
 
 
 def find_keys(user_dict, list_keys):
-
-    if type(user_dict) is dict:
-        key = user_dict.keys()
-        for k in key:
-            if type(user_dict[k]) is dict:
-                find_keys(user_dict[k].keys(), list_keys)
-                # print(data[k].keys())
-
-            else:
-                list_keys.append(k)
+    for k in user_dict:
+        if type(user_dict[k]) is dict:
+            list_keys.append(k)
+            find_keys(user_dict[k], list_keys)
+        else:
+            list_keys.append(k)
     return list_keys
 
 
 list_user_key = list()
-print(find_keys(data, list_user_key))
-print(data.keys())
+print('Все ключи словаря:',find_keys(data, list_user_key))
