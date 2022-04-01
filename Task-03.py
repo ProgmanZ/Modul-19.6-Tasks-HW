@@ -77,7 +77,13 @@ list_user_vol = list()
 
 print('Все ключи словаря:', find_keys(data, list_user_key))
 print('Все значения словаря:', find_vol(data, list_user_vol))
-l = find_vol(data, list_user_vol)
+
+data['ETH']['total_diff'] = '100'
+print(data)
+data['tokens'][0]['fst_token_info']['name'] = 'doge'
+print(data)
+#
+print(data)
 
 
 # В “ETH” добавить ключ “total_diff” со значением 100.
