@@ -78,18 +78,26 @@ list_user_vol = list()
 print('Все ключи словаря:', find_keys(data, list_user_key))
 print('Все значения словаря:', find_vol(data, list_user_vol))
 
+# В “ETH” добавить ключ “total_diff” со значением 100.
 data['ETH']['total_diff'] = '100'
 print(data)
+
+# Внутри “fst_token_info” значение ключа “name” поменять с “fdf” на “doge”.
 data['tokens'][0]['fst_token_info']['name'] = 'doge'
 print(data)
-#
+
+# Удалить “total_out” из tokens и присвоить его значение в “total_out” внутри “ETH”.
+data['ETH']['totalOut'] = data['tokens'][0]['total_out']
+del(data['tokens'][0]['total_out'])
 print(data)
 
+# Внутри "sec_token_info" изменить название ключа “price” на “total_price”.
+data.pop(data['tokens'][1]['sec_token_info']['price'])
+# print(data['tokens'][1]['sec_token_info']['price'])
+data
+#
 
-# В “ETH” добавить ключ “total_diff” со значением 100.
 #
-# Внутри “fst_token_info” значение ключа “name” поменять с “fdf” на “doge”.
-#
-# Удалить “total_out” из tokens и присвоить его значение в “total_out” внутри “ETH”.
+
 #
 # Внутри "sec_token_info" изменить название ключа “price” на “total_price”.
