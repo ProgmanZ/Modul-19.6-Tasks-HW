@@ -92,12 +92,6 @@ del(data['tokens'][0]['total_out'])
 print(data)
 
 # Внутри "sec_token_info" изменить название ключа “price” на “total_price”.
-data.pop(data['tokens'][1]['sec_token_info']['price'])
-# print(data['tokens'][1]['sec_token_info']['price'])
-data
-#
-
-#
-
-#
-# Внутри "sec_token_info" изменить название ключа “price” на “total_price”.
+# data.pop(data['tokens'][1]['sec_token_info']['price'])
+data['tokens'][1]['sec_token_info']['total_price'] = data['tokens'][1]['sec_token_info'].pop('price')
+print(data)
