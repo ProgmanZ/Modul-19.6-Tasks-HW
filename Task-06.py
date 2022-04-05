@@ -1,7 +1,5 @@
 # Задача 6. Словарь синонимов
 
-n_sinonim = input('Введите количество пар слов: ')
-
 def word(number):
     words = {
         0:'',
@@ -43,3 +41,26 @@ def word(number):
     else:
         return words[number // 1000] + words[number // 10 * 10][1] + words[number % 10]
 
+
+n_sinonim = int(input('Введите количество пар слов: '))
+
+user_dict = dict()
+ask = list()
+
+for numb in range(1, n_sinonim + 1):
+
+    while len(ask) != 2:
+        ask = input('{0} пара: '.format(word(numb).capitalize())).lower().split('-' or '—')
+        if len(ask) != 2:
+            print('Ошибка ввода. Необходимо указывать только одну пару синонимов через знак тире \'-\'.')
+
+    user_dict[ask[0]] = ask[1]
+    ask = list()
+
+while True:
+    ask = input('\nВведите слово: ').lower()
+    if not user_dict.get(ask):
+        print('Такого слова в словаре нет.')
+    else:
+        print('Синоним: {0}'.format(user_dict[ask].capitalize()))
+        break
