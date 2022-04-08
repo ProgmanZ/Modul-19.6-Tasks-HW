@@ -34,6 +34,8 @@ def word(number):
 
     }
 
+
+
     if number <= 19:
         return words[number]
     elif number % 10 == 0:
@@ -44,9 +46,17 @@ def word(number):
 
 PizzaTimeDB = dict()
 
-orders = int(input('Введите количество заказов: '))
 
-for order in range(1, orders + 1):
+def input_number_orders():
+    while True:
+        number_orders = input('Введите количество заказов: ')
+        if number_orders.isdigit():
+            return int(number_orders)
+        else:
+            print('Требуется ввод только числового значения.')
+
+
+for order in range(1, input_number_orders() + 1):
     while True:
         order_line = input(f'{word(order).capitalize()} заказ: ').lower().split(' ')
         if not len(order_line) == 3:
@@ -56,10 +66,16 @@ for order in range(1, orders + 1):
             break
     if order_line[0] not in PizzaTimeDB.keys():
         PizzaTimeDB[order_line[0]] = dict()
-        if order_line[1] not in PizzaTimeDB[order_line[0]][order_line[1]].keys():
-            PizzaTimeDB[order_line[0]][order_line[1]] = int(order_line[2])
+        PizzaTimeDB[order_line[0]][order_line[1]] = int(order_line[2])
     else:
-        PizzaTimeDB[order_line[0]][order_line[1]] += 1
+        if order_line[1] in PizzaTimeDB[order_line[0]].keys():
+            PizzaTimeDB[order_line[0]][order_line[1]] += int(order_line[2])
+        else:
+            PizzaTimeDB[order_line[0]][order_line[1]] = dict()
+            print('BlockElse before = ', PizzaTimeDB[order_line[0]][order_line[1]])
+            PizzaTimeDB[order_line[0]][order_line[1]] = int(order_line[2])
+            print('arter = ', PizzaTimeDB[order_line[0]][order_line[1]])
+    print(PizzaTimeDB)
 
 print(PizzaTimeDB)
 
