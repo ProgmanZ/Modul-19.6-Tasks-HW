@@ -34,8 +34,6 @@ def word(number):
 
     }
 
-
-
     if number <= 19:
         return words[number]
     elif number % 10 == 0:
@@ -44,10 +42,7 @@ def word(number):
         return words[number // 1000] + words[number // 10 * 10][1] + words[number % 10]
 
 
-PizzaTimeDB = dict()
-
-
-def input_number_orders():
+def input_number_orders_check():
     while True:
         number_orders = input('Введите количество заказов: ')
         if number_orders.isdigit():
@@ -56,26 +51,30 @@ def input_number_orders():
             print('Требуется ввод только числового значения.')
 
 
-for order in range(1, input_number_orders() + 1):
+def input_order_check(num_order):
     while True:
-        order_line = input(f'{word(order).capitalize()} заказ: ').lower().split(' ')
-        if not len(order_line) == 3:
+        order = input(f'{word(num_order).capitalize()} заказ: ').lower().split(' ')
+        if not len(order) == 3:
             print('Некорректно ввыполнен ввод. Должны быть 3 значения через пробел.\n'
                   'Например: "Фамилия" "Название пиццы" "Кол-во"')
         else:
-            break
-    if order_line[0] not in PizzaTimeDB.keys():
-        PizzaTimeDB[order_line[0]] = dict()
-        PizzaTimeDB[order_line[0]][order_line[1]] = int(order_line[2])
+            return order
+
+
+PizzaTimeDB = dict()
+
+for number_order in range(1, input_number_orders_check() + 1):
+
+    order = input_order_check(number_order)
+    if order[0] not in PizzaTimeDB.keys():
+        PizzaTimeDB[order[0]] = dict()
+        PizzaTimeDB[order[0]][order[1]] = int(order[2])
     else:
-        if order_line[1] in PizzaTimeDB[order_line[0]].keys():
-            PizzaTimeDB[order_line[0]][order_line[1]] += int(order_line[2])
+        if order[1] in PizzaTimeDB[order[0]].keys():
+            PizzaTimeDB[order[0]][order[1]] += int(order[2])
         else:
-            PizzaTimeDB[order_line[0]][order_line[1]] = dict()
-            print('BlockElse before = ', PizzaTimeDB[order_line[0]][order_line[1]])
-            PizzaTimeDB[order_line[0]][order_line[1]] = int(order_line[2])
-            print('arter = ', PizzaTimeDB[order_line[0]][order_line[1]])
-    print(PizzaTimeDB)
+            PizzaTimeDB[order[0]][order[1]] = dict()
+            PizzaTimeDB[order[0]][order[1]] = int(order[2])
 
 print(PizzaTimeDB)
 
