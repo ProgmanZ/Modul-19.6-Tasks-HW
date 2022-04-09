@@ -53,7 +53,7 @@ def input_number_orders_check():
 
 def input_order_check(num_order):
     while True:
-        order = input(f'{word(num_order).capitalize()} заказ: ').capitalize().split(' ')
+        order = input(f'{word(num_order).capitalize()} заказ: ').split(' ')
         if not len(order) == 3:
             print('Некорректно ввыполнен ввод. Должны быть 3 значения через пробел.\n'
                   'Например: "Фамилия" "Название пиццы" "Кол-во"')
@@ -61,11 +61,11 @@ def input_order_check(num_order):
             return order
 
 
-def print_item_dict(dict_DB):
-    for client in sorted(dict_DB):
+def print_item_dict(dict_db):
+    for client in sorted(dict_db):
         print(client)
-        for orders in sorted(dict_DB[client]):
-            print('\t{0}: {1}'.format(orders, dict_DB[client][orders]))
+        for orders in sorted(dict_db[client]):
+            print('\t{0}: {1}'.format(orders, dict_db[client][orders]))
 
 
 PizzaTimeDB = dict()
