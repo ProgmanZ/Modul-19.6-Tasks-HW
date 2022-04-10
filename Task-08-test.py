@@ -37,6 +37,13 @@ while flag:
 
 
     else:   # если вернулся сет
+        if len(numbers_answer) == 1:
+            if numbers_answer == riddle:
+                print('Вы угадали! Это число:', riddle)
+            else:
+                continue
+        else:
+
 
         # если длина сета == 1 то проверка с riddle
             # вывод ответа. Если угадал - выход из цикла по флагу, цикл продолжается
