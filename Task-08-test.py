@@ -3,17 +3,18 @@
 import random
 
 number_user = int(input('Введите максимальное число: '))
-riddle = random.randint(1,number_user)
+riddle = random.randint(1, number_user)
 flag = True
-main_set_numbers = {i for i in range(1, number_user)}     # сет с числом в котором есть верное
+main_set_numbers = {i for i in range(1, number_user)}  # сет с числом в котором есть верное
 answer_set_error = set()
 
 
 def check_enter(enter_list):
     if enter_list == 'помогите':
         return -1
-    elif enter_list.isdigit():
-        return {int(i) for i in enter_list.split(' ')}
+
+    elif not enter_list.isalpha():
+        return {int(i) if i.isdigit() else -1 for i in enter_list.split(' ')}
     else:
         return 0
 
@@ -32,42 +33,24 @@ while flag:
 
         # ответ == Помогите
         # вычисление и предоставление вариантов, которые мог загадать оппонент
-
+        main_set_numbers = main_set_numbers.difference(answer_set_error)
         flag = False
 
+    else:  # если вернулся сет
 
-    else:   # если вернулся сет
         if len(numbers_answer) == 1:
             if numbers_answer == riddle:
                 print('Вы угадали! Это число:', riddle)
+                flag = False
             else:
+                answer_set_error.add(numbers_answer)
                 continue
         else:
-
-
-        # если длина сета == 1 то проверка с riddle
-            # вывод ответа. Если угадал - выход из цикла по флагу, цикл продолжается
-
-        # вычисление вариантов: "плохих ответов" и "хороших ответов"
-
-        numbers_set = set(int(i) for i in numbers_answer.split(' '))
-        if riddle in numbers_set:
-            print('Ответ Артёма: Да')
-            if not len(set_yes):
-                set_yes.update(numbers_set)
+            if riddle in numbers_answer:
+                print('Ответ Артёма: Да')
+                main_set_numbers.discard(numbers_answer)
+                main_set_numbers.add(riddle)
             else:
-                set_yes.add(numbers_set)
-        else:
-            print('Ответ Артёма: Нет')
-            if not len(set_no):
-                set_no.update(numbers_set)
-            else:
-                set_yes.discard(set_no)
-    elif numbers_answer.lower() == 'помогите':
-        flag = False
-
-
-
-
-
+                print('Ответ Артёма: Нет')
+                answer_set_error.add(numbers_answer)
 print()
