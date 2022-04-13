@@ -31,7 +31,8 @@ while True:
 
     elif user_numbers == -1:
         # "помогите"
-        print('Артём мог загадать следующие числа: ', ' '.join([ i for i in set_say_yes]))
+
+        print('Артём мог загадать следующие числа: ', end = '')
         for elem in set_say_yes:
             print(elem, end = ' ')
         break
