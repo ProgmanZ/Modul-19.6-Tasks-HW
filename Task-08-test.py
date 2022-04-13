@@ -3,54 +3,45 @@
 import random
 
 number_user = int(input('Введите максимальное число: '))
-riddle = random.randint(1, number_user)
-flag = True
-main_set_numbers = {i for i in range(1, number_user)}  # сет с числом в котором есть верное
-answer_set_error = set()
+
+riddle = random.randint(1, number_user + 1)  # число, которое загадал Артур
+
+set_say_yes = {int(i) for i in range(1, number_user + 1)}  # сет с последовательностью чисел содержащий верный элемент
+
+set_say_no = set()  # сет с последовательностью чисел при отрицательном ответе
 
 
-def check_enter(enter_list):
+def check_enter(enter_list):  # проверка ввода от пользователя
     if enter_list == 'помогите':
         return -1
-
     elif not enter_list.isalpha():
-        return {int(i) if i.isdigit() else -1 for i in enter_list.split(' ')}
+        return {int(i) for i in enter_list.split(' ')}
     else:
         return 0
 
 
-while flag:
+while True:
 
-    numbers_answer = check_enter(input('Нужное число есть среди вот этих чисел: '))
+    user_numbers = check_enter(input('Нужное число есть среди вот этих чисел: '))
 
-    if numbers_answer == 0:
-
+    if user_numbers == 0:
         # неверный ввод
         print('Неверный ввод данных. Проверьте вводимые данные. Если требуется помошь - введите "Помогите".')
         continue
 
-    elif numbers_answer == -1:
+    elif user_numbers == -1:
+        # "помогите"
+        print('Артём мог загадать следующие числа: ', set_say_yes.discard(set_say_no))
+        break
 
-        # ответ == Помогите
-        # вычисление и предоставление вариантов, которые мог загадать оппонент
-        main_set_numbers = main_set_numbers.difference(answer_set_error)
-        flag = False
+    elif riddle == user_numbers:
+        # если сет состоит из 1 элемента и ответ верный
+        print("Ура, вы угадали.")
 
-    else:  # если вернулся сет
+    else:
+        if riddle in user_numbers:
+            print("Ответ Артёма: Да")
 
-        if len(numbers_answer) == 1:
-            if numbers_answer == riddle:
-                print('Вы угадали! Это число:', riddle)
-                flag = False
-            else:
-                answer_set_error.add(numbers_answer)
-                continue
         else:
-            if riddle in numbers_answer:
-                print('Ответ Артёма: Да')
-                main_set_numbers.discard(numbers_answer)
-                main_set_numbers.add(riddle)
-            else:
-                print('Ответ Артёма: Нет')
-                answer_set_error.add(numbers_answer)
-print()
+            print("Ответ Артёма: Нет")
+            set_say_yes = {set_say_yes.discard(i) for i in user_numbers}
