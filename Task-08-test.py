@@ -31,12 +31,20 @@ while True:
 
     elif user_numbers == -1:
         # "помогите"
-        print('Артём мог загадать следующие числа: ', set_say_yes.discard(set_say_no))
+        print('Артём мог загадать следующие числа: ', ' '.join([ i for i in set_say_yes]))
+        for elem in set_say_yes:
+            print(elem, end = ' ')
         break
 
-    elif riddle == user_numbers:
+    elif len(set_say_yes) == 1:
         # если сет состоит из 1 элемента и ответ верный
-        print("Ура, вы угадали.")
+        print("Вы перебрали числа", set_say_no)
+        print("Осталось только одно число, которое вы не ввели. Это:", set_say_yes)
+        break
+
+    elif user_numbers == riddle:
+        print('Вы угадали число')
+        break
 
     else:
         if riddle in user_numbers:
@@ -44,4 +52,6 @@ while True:
 
         else:
             print("Ответ Артёма: Нет")
-            set_say_yes = {set_say_yes.discard(i) for i in user_numbers}
+            for elem in user_numbers:
+                set_say_yes.discard(elem)
+                set_say_no.add(elem)
