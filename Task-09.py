@@ -79,6 +79,9 @@ for pair in range(1, people):
 
 print(try_dict)
 
+for x in dict:
+
+
 #
 # for i in try_dict.keys():
 #     if i in try_dict[i]:
