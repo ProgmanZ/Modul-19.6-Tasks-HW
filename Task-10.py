@@ -2,8 +2,6 @@
 
 user_string = input('Введите строку: ')
 
-len_str = len(user_string)
-
 user_dict = {key: str(user_string.count(key)) for key in set(user_string)}
 
 str_val = ''.join(user_dict.values())
