@@ -1,10 +1,5 @@
 # Задача 9. Родословная.
 
-# необходимо собирать имена в сет
-# необходимо сделать словарь со значениями {ключ(имя): продумать значение высоты}
-# каждый ввод разбивается по пробелу в список
-# проверка на корректность ввода - список должен быть не более чем на 2 элемента
-
 def word(number):
     words = {
         0: '',
@@ -50,7 +45,7 @@ def word(number):
 def enter_number():
     while True:
         user_string = input('Введите количество человек: ')
-        if not user_string.isalpha():
+        if user_string.isdigit():
             return int(user_string)
         else:
             print('Ошибка ввода количества. Ожидается ввод числа.')
@@ -66,40 +61,17 @@ def enter_pairs(number_pair):
             print('Каждая строка должна иметь вид «имя_потомка имя_родителя» (через пробел).')
 
 
-people = enter_number()
 try_dict = dict()
+num_pairs = enter_number()
 
-for pair in range(1, people):
+for pair in range(1, num_pairs):
     temp_list = enter_pairs(pair)
-    if temp_list[1] in try_dict.keys():
-        try_dict[temp_list[1]]+=1
-    else:
-        try_dict[temp_list[1]] = dict()
-        try_dict[temp_list[1]]=(temp_list[0])
+    if temp_list[1] not in try_dict.keys():
+        try_dict[temp_list[1]] = 0
+    if temp_list[0] not in try_dict.keys():
+        try_dict[temp_list[0]] = try_dict[temp_list[1]] + 1
 
-print(try_dict)
+print("«Высота» каждого члена семьи:")
 
-for x in dict:
-
-
-#
-# for i in try_dict.keys():
-#     if i in try_dict[i]:
-#         try_dict[i] =
-#
-#
-# Первая пара: Alexei Peter_I
-#
-# Вторая пара: Anna Peter_I
-#
-# Третья пара: Elizabeth Peter_I
-#
-# Четвёртая пара: Peter_II Alexei
-#
-# Пятая пара: Peter_III Anna
-#
-# Шестая пара: Paul_I Peter_III
-#
-# Седьмая пара: Alexander_I Paul_I
-#
-# Восьмая пара: Nicholaus_I Paul_I
+for key in sorted(try_dict.keys()):
+    print(f'{key} {try_dict[key]}')
