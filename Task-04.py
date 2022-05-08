@@ -32,7 +32,7 @@ def counter(dict_list):
     sum_price = 0
     for i in dict_list:
         sum_quantity += i['quantity']
-        sum_price += i['price']
+        sum_price += i['quantity'] * i['price']
     return sum_quantity, sum_price
 
 
@@ -45,9 +45,18 @@ def word(number):
         return 'рублей'
 
 
+def word_quantity(number):
+    if number % 10 == 1 and number % 100 != 11:
+        return 'штука'
+    elif number % 10 in [2, 3, 4]:
+        return 'штуки'
+    else:
+        return 'штук'
+
+
 print('Результат работы программы:')
 for item in goods:
 
     quontity, summ = counter(store[goods[item]])
-    print(f'{item} - {quontity}, стоимость {summ} {word(summ)}.')
+    print(f'{item} - {quontity} {word_quantity(quontity)}, стоимость {summ} {word(summ)}.')
 
