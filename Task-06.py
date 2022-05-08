@@ -68,7 +68,3 @@ while True:
     else:
         print('Синоним: {0}'.format(user_dict[ask].capitalize()))
         break
-
-# Привет - Здравствуйте
-# Печально - Грустно
-# Весело - Радостно

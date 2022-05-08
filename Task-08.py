@@ -4,7 +4,7 @@ import random
 
 
 def check_enter(enter_list):
-    if enter_list == 'помогите':
+    if enter_list.capitalize() == 'Помогите!':
         return -1
     elif not enter_list.isalpha():
         return {int(i) for i in enter_list.split(' ')}
@@ -17,24 +17,33 @@ def print_numbers(set_user):
         print(elem, end=' ')
 
 
-number_user = int(input('Введите максимальное число: '))
+def check_number():
+    while True:
+        number = input('Введите максимальное число: ')
+        if number.isdigit():
+            return int(number)
+        else:
+            print('Ошибка ввода количества. Попробуйте снова..')
+
+
+number_user = check_number()
 riddle = random.randint(1, number_user)
 set_say_yes = {int(i) for i in range(1, number_user + 1)}
 set_say_no = set()
 
 while True:
 
-    user_numbers = check_enter(input('Нужное число есть среди вот этих чисел: '))
+    user_numbers = check_enter(input('Нужное число есть среди вот этих чисел: ').strip())
 
     if user_numbers == 0:
 
-        print('Неверный ввод данных. Проверьте вводимые данные. Если требуется помошь - введите "Помогите".')
+        print('Неверный ввод данных. Проверьте вводимые данные. Если требуется помошь - введите "Помогите!".')
         continue
 
     elif user_numbers == -1:
 
         print('Артём мог загадать следующие числа: ', end='')
-        print_numbers(set_say_yes)
+        print_numbers(set_say_yes - set_say_no)
         break
 
     else:
