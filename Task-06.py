@@ -45,22 +45,30 @@ def word(number):
 n_sinonim = int(input('Введите количество пар слов: '))
 
 user_dict = dict()
+invert_user_dict = dict()
+
 ask = list()
 
 for numb in range(1, n_sinonim + 1):
 
     while len(ask) != 2:
-        ask = input('{0} пара: '.format(word(numb).capitalize())).lower().split('-' or '—')
+        ask = input('{0} пара: '.format(word(numb))).lower().split('-' or '—')
         if len(ask) != 2:
             print('Ошибка ввода. Необходимо указывать только одну пару синонимов через знак тире \'-\'.')
 
-    user_dict[ask[0]] = ask[1]
+    user_dict[ask[0].strip()] = ask[1].strip()
+    user_dict[ask[1].strip()] = ask[0].strip()
+
     ask = list()
 
 while True:
-    ask = input('\nВведите слово: ').lower()
+    ask = input('\nВведите слово: ').strip().lower()
     if not user_dict.get(ask):
         print('Такого слова в словаре нет.')
     else:
         print('Синоним: {0}'.format(user_dict[ask].capitalize()))
         break
+
+# Привет - Здравствуйте
+# Печально - Грустно
+# Весело - Радостно
